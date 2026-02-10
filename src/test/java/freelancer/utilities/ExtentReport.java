@@ -31,6 +31,30 @@ public class ExtentReport {
         extentTest = extentReports.createTest(testName, "Test Steps");
     }
 
+    public static void addScreenshot(String name) {
+        String resimYolu = ReusableMethods.getScreenshotForReport(name);
+
+        try {
+            extentTest.addScreenCaptureFromPath(resimYolu);
+        } catch (Exception e) {
+            System.out.println("Ekran görüntüsü rapora eklenemedi!");
+        }
+    }
+
+
+    public static ExtentTest getTest() {
+        return extentTest;
+    }
+
+    public static void info(String message) {
+        extentTest.info(message);
+    }
+
+    public static void pass(String message) {
+        extentTest.pass(message);
+    }
+
+
     public static void flushReport() {
         if (extentReports != null) {
             extentReports.flush();

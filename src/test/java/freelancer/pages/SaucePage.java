@@ -48,5 +48,28 @@ public class SaucePage {
     @FindBy(css = "#continue")
     public WebElement continueText;
 
+    @FindBy(css = "#finish")
+    public WebElement finish;
+
+    @FindBy(xpath ="//button[.='Back Home']")
+    public WebElement anaSayfayaDön;
+
+    @FindBy(xpath = "//span[.='Products']")
+    public WebElement urunlerBaslığı;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

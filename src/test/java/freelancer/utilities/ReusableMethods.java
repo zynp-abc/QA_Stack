@@ -1,5 +1,6 @@
 package freelancer.utilities;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -42,7 +43,7 @@ public class ReusableMethods {
             TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
             Files.write(Paths.get(tamYol), ts.getScreenshotAs(OutputType.BYTES));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return fileName;
@@ -108,6 +109,10 @@ public class ReusableMethods {
 
     public static void clickWithWait(WebElement element, int timeout) {
         waitForClickability(element, timeout).click();
+    }
+
+    public static void clickWithJS(WebElement element) {
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
 
 
