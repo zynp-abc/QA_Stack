@@ -35,8 +35,6 @@ public class ReusableMethods {
     public static String getScreenshotForReport(String name) {
         String date = DateTimeFormatter.ofPattern("ddMMyyyy_HHmmss").format(LocalDateTime.now());
         String fileName = name + "_" + date + ".png";
-
-
         String tamYol = System.getProperty("user.dir") + "/test-output/" + fileName;
 
         try {

@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import freelancer.pages.AutomationExercisePage;
 import freelancer.utilities.ConfigReader;
 import freelancer.utilities.Driver;
+import freelancer.utilities.ExtentReport;
 import freelancer.utilities.ReusableMethods;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,8 +14,10 @@ public class C03_AutomationExercise {
     @Test
     public void userCanRegisterAndDeleteAccount() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("automationExerciseUrl"));
+        ExtentReport.createExtentTest("User Journey Test");
 
+        Driver.getDriver().get(ConfigReader.getProperty("automationExerciseUrl"));
+        ExtentReport.info("Ana sayfaya gidildi");
         AutomationExercisePage automationExercisePage = new AutomationExercisePage();
         automationExercisePage.signupLogin.click();
 
@@ -41,6 +44,7 @@ public class C03_AutomationExercise {
         automationExercisePage.zipcode.sendKeys(faker.address().zipCode());
         automationExercisePage.mobileNumber.sendKeys(faker.phoneNumber().phoneNumber());
         automationExercisePage.createAccount.click();
+        ExtentReport.pass("Hesap başarıyla oluşturuldu");
 
         Assert.assertTrue(automationExercisePage.createdAccount.isDisplayed());
         automationExercisePage.Continue.click();
@@ -51,18 +55,24 @@ public class C03_AutomationExercise {
         Assert.assertTrue(automationExercisePage.signupLogin.isDisplayed());
 
         automationExercisePage.signupLogin.click();
-        automationExercisePage.emaiLogin.sendKeys("azize.ece@gmail.com");
-        automationExercisePage.passwordLogin.sendKeys("Azize123");
+        automationExercisePage.emaiLogin.sendKeys(ConfigReader.getProperty("automationExerciseEmail"));
+        automationExercisePage.passwordLogin.sendKeys(ConfigReader.getProperty("automationExercisePassword"));
         automationExercisePage.loginButton.click();
+        ExtentReport.info("Hesaba giriş yapıldı");
         Driver.getDriver().navigate().refresh();
         automationExercisePage.products.click();
         automationExercisePage.viewProductsButton.get(10).click();
         automationExercisePage.addToCart.click();
+        ReusableMethods.waitForVisibility(automationExercisePage.added,10);
+        ExtentReport.info("Ürün sepete eklendi");
+       ExtentReport.addScreenshot("Ürün eklendi");
 
         Assert.assertTrue(automationExercisePage.added.isDisplayed());
         automationExercisePage.continueShopping.click();
         automationExercisePage.products.click();
         automationExercisePage.logout.click();
+        ExtentReport.info("Hesaptan çıkış yapıldı");
+        ExtentReport.flushReport();
 
 
     }
