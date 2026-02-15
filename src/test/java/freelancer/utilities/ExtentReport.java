@@ -65,7 +65,13 @@ public class ExtentReport {
     public void tearDownSuite() {
         ExtentReport.flushReport();
     }
+
+
 }
+
+
+
+
 
 
 
