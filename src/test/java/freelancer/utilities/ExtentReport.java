@@ -16,20 +16,23 @@ public class ExtentReport {
     protected static ExtentTest extentTest;
 
     public static void createExtentTest(String testName) {
-        Locale.setDefault(Locale.US);
-        extentReports = new ExtentReports();
+        if (extentReports == null) {
+            Locale.setDefault(Locale.US);
+            extentReports = new ExtentReports();
 
-        String date = DateTimeFormatter.ofPattern("ddMMyyyy_HHmmss").format(LocalDateTime.now());
-        String path = System.getProperty("user.dir") + "/test-output/Rapor_" + date + ".html";
-        extentSparkReporter = new ExtentSparkReporter(path);
-        extentReports.attachReporter(extentSparkReporter);
-        extentSparkReporter.config().setDocumentTitle("Automation Test Results");
+            String date = DateTimeFormatter.ofPattern("ddMMyyyy_HHmmss").format(LocalDateTime.now());
+            String path = System.getProperty("user.dir") + "/test-output/Rapor_" + date + ".html";
+            extentSparkReporter = new ExtentSparkReporter(path);
+            extentReports.attachReporter(extentSparkReporter);
+            extentSparkReporter.config().setDocumentTitle("Automation Test Results");
+        }
 
 
         extentReports.setSystemInfo("Browser", "Chrome");
         extentReports.setSystemInfo("Test Automation Engineer", "Zeynep");
         extentTest = extentReports.createTest(testName, "Test Steps");
     }
+
 
     public static void addScreenshot(String name) {
         String resimYolu = ReusableMethods.getScreenshotForReport(name);
@@ -60,6 +63,7 @@ public class ExtentReport {
             extentReports.flush();
         }
     }
+
 
     @AfterSuite
     public void tearDownSuite() {
