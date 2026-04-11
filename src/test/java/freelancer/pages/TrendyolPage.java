@@ -20,5 +20,21 @@ public class TrendyolPage {
     @FindBy(xpath = "//button[@data-testid='email-check-button']")
     public WebElement continuing;
 
+    @FindBy(css = "#register-password-input")
+    public WebElement password;
 
+    @FindBy(xpath = "(//div[@class='p-checkbox-wrapper checkbox-small  '])[3]")
+    public WebElement checkBox;
+
+    @FindBy(xpath = "//div[@class='recaptcha-checkbox-border']")
+    public WebElement captcha;
+
+    @FindBy(xpath = "//div[contains(text(),'Kadın')]")
+    public WebElement genderWomenButton;
+
+    @FindBy(xpath = "//div[contains(text(),'Erkek')]")
+    public WebElement genderManButton;
+
+    @FindBy(xpath = "//input[@data-testid='suggestion']")
+    public WebElement searchBox;
 }

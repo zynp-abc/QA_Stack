@@ -2,6 +2,7 @@ package freelancer.utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -22,7 +23,10 @@ public class Driver {
 
             switch (ConfigReader.getProperty("browser")) {
                 case "chrome":
-                    driverPool.set(new ChromeDriver());
+
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--disable-notifications");
+                    driverPool.set(new ChromeDriver(options));
                     break;
                 case "firefox":
                     driverPool.set(new FirefoxDriver());
